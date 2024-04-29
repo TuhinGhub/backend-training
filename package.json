@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "joi": "^17.13.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^3.1.0",
+    "readline-sync": "^1.4.10"
+  },
+  "scripts": {
+    "start:extra": "babel-node extra",
+    "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "start": "npm run start",
+    "nodemon": "nodemon ./dist/index.js",
+    "test": "echo \"Error: no test specified\"",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "npm run lint --fix",
+    "index": "npx babel-node Extra",
+    "prepare": "husky install"
+  }
+}
