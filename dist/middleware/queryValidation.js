@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const Joi = require("joi");
 const userSchema = require("../config/validationJoi");
 const queryVallidation = (req, res, next) => {
