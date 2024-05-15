@@ -13,8 +13,8 @@ const menSchema=new mongoose.Schema({
     },
     dob:{
         type:Date,
-        rquired:true,
-        required:true
+        required:true,
+        trim:true
     },
     country:{
         type:String,
@@ -34,3 +34,5 @@ const menSchema=new mongoose.Schema({
 
 const MenRankings=new mongoose.model("MenRankings",menSchema);
 module.exports=MenRankings;
+
+
