@@ -4,7 +4,6 @@ const userRegistration = require('../repository/user/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Signup Function
 const signup = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -26,7 +25,6 @@ const signup = async (req, res) => {
     }
 };
 
-// Login Function
 const login = async (req, res) => {
     const { name, password } = req.body;
 
