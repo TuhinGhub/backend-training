@@ -1,28 +1,19 @@
 
-console.log('here1');
-const express=require('express');
-console.log('here2');
-const {signup}=require('../controllers/userController');
-console.log('here3');
-const app = express();
-const router=new express.Router();
-app.use(express.json());
-app.use(router);
-const PORT = 5000;
+const express = require('express');
+const { signup,login,getdata } = require('../controllers/userController');
+const { jwtAuthentication } = require('../middleware/jwtAuthentication');
 
-console.log('here4');
-const routerControl=()=>{
-    console.log('here5');
-
-router.post('/signup',signup);
+const router = express.Router(); // Create the router instance here
+router.use(express.json()); // Add the JSON middleware to the router
 
 
+const routerControl = () => {
 
-
+    router.post('/signup', signup);
+    router.post('/login',login);
+    router.get('/getdata',jwtAuthentication,getdata);
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-})
+routerControl(); // Call the routerControl function to set up routes
 
-module.exports={routerControl};
+module.exports = router; // Export the router instance

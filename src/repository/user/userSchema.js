@@ -5,10 +5,12 @@ const regmodel = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
   },
   email: {
     type: String,
+    unique:true,
     required: true,
     trim: true,
     validate: {
@@ -23,7 +25,7 @@ const regmodel = new mongoose.Schema({
     required: true,
     trim: true,
     minlength: [6, "must be at least 6 characters long, got {VALUE}"],
-    maxlength: 20,
+    maxlength: 60,
   },
 });
 

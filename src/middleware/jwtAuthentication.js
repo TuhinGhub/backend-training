@@ -1,12 +1,13 @@
-const jwt=require('jasonwebtoken');
+const jwt=require('jsonwebtoken');
 
 const jwtAuthentication=(req,res,next)=>{
-    const token=req.header.auth-token;
+    const token=req.headers["authtoken"];
+    console.log(token);
     if(!token){
         return res.status(401).send('Access Denied');
     }
     try{
-        const verified=jwt.verify(token,process.env.TOKEN_SECRET);
+        const verified=jwt.verify(token,"tuhin");
         req.user=verified;
         next();
     }catch(err){
