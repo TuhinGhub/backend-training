@@ -2,9 +2,13 @@
 const express = require('express');
 const { signup,login,dashboard,roleCheck } = require('../controllers/userController');
 const { jwtAuthentication } = require('../middleware/jwtAuthentication');
+const security=require('../middleware/security');
+const helmet = require('helmet');
 
-const router = express.Router(); // Create the router instance here
-router.use(express.json()); // Add the JSON middleware to the router
+const router = express.Router(); 
+router.use(express.json()); 
+router.use(helmet());
+router.use(security.setHeaders);
 
 
 const routerControl = () => {
@@ -15,6 +19,6 @@ const routerControl = () => {
     router.post('/admin',roleCheck);
 }
 
-routerControl(); // Call the routerControl function to set up routes
+routerControl(); 
 
-module.exports = router; // Export the router instance
+module.exports = router; 
