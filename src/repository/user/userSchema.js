@@ -27,6 +27,13 @@ const regmodel = new mongoose.Schema({
     minlength: [6, "must be at least 6 characters long, got {VALUE}"],
     maxlength: 60,
   },
+
+  roles:{
+    type:String,
+    required:true,
+    trim:true,
+    enum:["admin","user"]
+  },
 });
 
 const userRegistration = new mongoose.model("userRegistration",regmodel);

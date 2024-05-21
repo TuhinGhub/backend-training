@@ -1,6 +1,6 @@
 
 const express = require('express');
-const { signup,login,getdata } = require('../controllers/userController');
+const { signup,login,dashboard,roleCheck } = require('../controllers/userController');
 const { jwtAuthentication } = require('../middleware/jwtAuthentication');
 
 const router = express.Router(); // Create the router instance here
@@ -11,7 +11,8 @@ const routerControl = () => {
 
     router.post('/signup', signup);
     router.post('/login',login);
-    router.get('/getdata',jwtAuthentication,getdata);
+    router.get('/dashboard',jwtAuthentication,dashboard);
+    router.post('/admin',roleCheck);
 }
 
 routerControl(); // Call the routerControl function to set up routes

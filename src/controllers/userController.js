@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const signup = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password,roles } = req.body;
 
     try {
         const salt = await bcrypt.genSalt();
@@ -14,7 +14,8 @@ const signup = async (req, res) => {
         const addUser = await userRegistration.create({
             name: name,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
+            roles: roles,
         });
 
         console.log(addUser);
@@ -49,12 +50,31 @@ const login = async (req, res) => {
     }
 };
 
-// Get Data Function
-const getdata = (req, res) => {
-    if (!req.user) {
-        return res.status(404).send("User not found");
-    }
-    res.send(`user is IN`);
-};
+const dashboard=(req,res)=>{
+    res.send(`welcome to dashboard`)
 
-module.exports = { signup, login, getdata };
+}
+
+const roleCheck=async(req,res)=>{
+    const {name,password}=req.body;
+    try{
+        const user=await userRegistration.findOne({name});
+        if(!user)
+       return res.status(404).send("User not found");
+
+        const passCheck=await bcrypt.compare(password,user.password);
+        if(!passCheck)
+        return res.status(401).send("invalid password");
+        
+        if(user.roles!=='admin')
+         return res.status(403).send('FORBIDDEN REQUEST! Not an ADMIN');
+        
+        return res.status(200).send('Welcome ADMIN');
+
+    }catch(err){
+        console.error(err);
+        return res.status(500).send(`Error logging in: ${err.message}`);
+    }
+}
+
+module.exports = { signup, login, dashboard,roleCheck };
