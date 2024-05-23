@@ -1,4 +1,4 @@
-require('../config/Database');
+// require('../config/Database');
 
 const userRegistration = require('../repository/user/userSchema');
 const bcrypt = require('bcrypt');

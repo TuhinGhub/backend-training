@@ -1,3 +1,9 @@
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/roles');
+const connection = () => {
+   return mongoose.connect("mongodb://localhost:27017/roles").then(() => {
+    console.log("Database connected");
+  });
+};
+
+module.exports = connection;
